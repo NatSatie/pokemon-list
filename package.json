@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "@atlaskit/button": "^16.0.0",
+    "@atlaskit/form": "^8.2.4",
     "@atlaskit/modal-dialog": "^11.7.3",
     "@atlaskit/spinner": "^15.0.11",
     "@atlaskit/textfield": "^5.0.5",
@@ -14,7 +15,10 @@
     "@types/node": "^12.0.0",
     "@types/react": "^17.0.0",
     "@types/react-dom": "^17.0.0",
+    "@types/styled-components": "^5.1.12",
+    "@typescript-eslint/parser": "^4.29.0",
     "cypress": "^8.1.0",
+    "eslint": "^7.32.0",
     "next": "^11.0.1",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
@@ -44,7 +48,6 @@
   },
   "devDependencies": {
     "@cypress/react": "^5.9.3",
-    "@cypress/webpack-dev-server": "^1.4.0",
-    "eslint": "^7.32.0"
+    "@cypress/webpack-dev-server": "^1.4.0"
   }
 }

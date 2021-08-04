@@ -1,9 +1,14 @@
-import { Container } from '../style/List';
+import { Pokemon } from '../interfaces/Pokemon';
+import { Container } from '../style/Item';
 
-const Item = () => {
+interface ItemProps {
+  info: Pokemon;
+}
+
+const Item: React.FC<ItemProps> = ({info}) => {  
   return(
     <Container>
-      pokemon list
+      {info.name}
     </Container>
   )
 }

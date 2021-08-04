@@ -18,16 +18,22 @@ const PokemonProvider: React.FC = ({children}) => {
 
   const getPokemon = async () => {
     const allPokemon = [];
+    setIsLoading(true);
     for (let i = 1; i <= 151; i++) {
       const out = await PokemonApi.getPokemonByNameId(i.toString());
       allPokemon.push(out);
     }
     setPokedex(allPokemon);
+    setIsLoading(false);
   }
 
   useEffect(() => {
     getPokemon();
   }, []);
+
+  useEffect(() => {
+    console.log(isLoading);
+  }, [isLoading]);
   
   return(
     <PokemonContext.Provider

@@ -9,7 +9,7 @@
   dependencies:
     tslib "^2.0.0"
 
-"@atlaskit/analytics-next@^8.2.0":
+"@atlaskit/analytics-next@^8.0.0", "@atlaskit/analytics-next@^8.2.0":
   version "8.2.1"
   resolved "https://registry.yarnpkg.com/@atlaskit/analytics-next/-/analytics-next-8.2.1.tgz#643278999bb1923d7532c3977d23cf3624bacc93"
   integrity sha512-/c68oHIvEKD8t9xRFj24Lv8ys6CpWePsbK7kdQnwdfsGnnRJ9ZkoBEHt+C5tiCM6QA1SJEphjhnlo/xXXALuCw==
@@ -18,6 +18,17 @@
     "@babel/runtime" "^7.0.0"
     prop-types "^15.5.10"
     use-memo-one "^1.1.1"
+
+"@atlaskit/avatar@^20.3.3":
+  version "20.3.3"
+  resolved "https://registry.yarnpkg.com/@atlaskit/avatar/-/avatar-20.3.3.tgz#4abbd68ea4571e9291d30e17d1bac5f0e6c58da9"
+  integrity sha512-Cvv4gNClTzRDm2m5gKutbYvl26Zcp+xpEasQb4L/N08iZuN0u/vOFOFoNzMYQ+dmQ7OMOI9BjLJjZrTi+mdXBw==
+  dependencies:
+    "@atlaskit/analytics-next" "^8.0.0"
+    "@atlaskit/icon" "^21.6.0"
+    "@atlaskit/theme" "^11.4.0"
+    "@babel/runtime" "^7.0.0"
+    "@emotion/core" "^10.0.9"
 
 "@atlaskit/blanket@^12.1.0":
   version "12.1.0"
@@ -72,7 +83,7 @@
     react-uid "^2.2.0"
     tiny-invariant "^0.0.3"
 
-"@atlaskit/icon@^21.7.0":
+"@atlaskit/icon@^21.6.0", "@atlaskit/icon@^21.7.0":
   version "21.7.3"
   resolved "https://registry.yarnpkg.com/@atlaskit/icon/-/icon-21.7.3.tgz#81e04753000e58e804b910345f59c7e0f817421a"
   integrity sha512-mtTnQH6zyqIWHh1/0d4y07hfr0F6D7uOUr6wDqjeEyZD4jmeoBlcnLrIFtXjMd8BFDVkswusuQCqNQospFp1SQ==
@@ -229,6 +240,15 @@
     lodash "^4.17.19"
     semver "^5.4.1"
     source-map "^0.5.0"
+
+"@babel/eslint-parser@^7.15.0":
+  version "7.15.0"
+  resolved "https://registry.yarnpkg.com/@babel/eslint-parser/-/eslint-parser-7.15.0.tgz#b54f06e04d0e93aebcba99f89251e3bf0ee39f21"
+  integrity sha512-+gSPtjSBxOZz4Uh8Ggqu7HbfpB8cT1LwW0DnVVLZEJvzXauiD0Di3zszcBkRmfGGrLdYeHUwcflG7i3tr9kQlw==
+  dependencies:
+    eslint-scope "^5.1.1"
+    eslint-visitor-keys "^2.1.0"
+    semver "^6.3.0"
 
 "@babel/generator@^7.12.1", "@babel/generator@^7.12.17":
   version "7.12.17"
@@ -5501,6 +5521,11 @@ eslint-visitor-keys@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/eslint-visitor-keys/-/eslint-visitor-keys-2.0.0.tgz#21fdc8fbcd9c795cc0321f0563702095751511a8"
   integrity sha512-QudtT6av5WXels9WjIM7qz1XD1cWGvX4gGXvp/zBn9nXG02D0utdU3Em2m/QjTnrsk6bBjmCygl3rmj118msQQ==
+
+eslint-visitor-keys@^2.1.0:
+  version "2.1.0"
+  resolved "https://registry.yarnpkg.com/eslint-visitor-keys/-/eslint-visitor-keys-2.1.0.tgz#f65328259305927392c938ed44eb0a5c9b2bd303"
+  integrity sha512-0rSmRBzXgDzIsD6mGdJgevzgezI534Cer5L/vyMX0kHzT/jiB43jRhd9YUlMGYLQy2zprNmoT8qasCGtY+QaKw==
 
 eslint-webpack-plugin@^2.5.2:
   version "2.5.2"

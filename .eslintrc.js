@@ -1,6 +1,9 @@
-{
+/* {
   "root": true,
-  "parser": "@typescript-eslint/parser",
+  "parser": [
+    "@typescript-eslint/parser",
+    "@babel/eslint-parser"
+  ],
   "plugins": [
     "@typescript-eslint"
   ],
@@ -9,4 +12,4 @@
     "plugin:@typescript-eslint/eslint-recommended",
     "plugin:@typescript-eslint/recommended"
   ]
-}
+} */

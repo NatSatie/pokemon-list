@@ -9,7 +9,7 @@ interface ColumnProps {
 const Column: React.FC<ColumnProps> = ({info}) => {  
   return(
     <Container>
-      {info.map( elem => <Item info={elem}/>)}
+      {info.map( (elem, index) => <Item key={index} info={elem}/>)}
     </Container>
   )
 }

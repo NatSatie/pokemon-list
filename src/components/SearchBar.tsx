@@ -8,7 +8,6 @@ const SearchBar = () => {
 
   const handleChange = (event: FormEvent<HTMLInputElement>) => {
     pocket.setSearchInput(event.currentTarget.value);
-    
   }
 
   return(

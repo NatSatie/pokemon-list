@@ -7,23 +7,11 @@ import { Pokemon } from '../interfaces/Pokemon';
 import Column from './Column';
 
 const List = () => {
-  const [index, setIndex] = useState<number>(1);
-  const [size, setSize] = useState<number>(31);
-  const [pokemonGroup, setPokemonGroup] = useState<Array<Array<Pokemon>>>([]);
-  const { isLoading, setIsLoading, pokedex } = usePokemon();
+  const { isLoading, pokedexFiltered } = usePokemon();
 
   const ListGroup = () => {
-    const newGroup = [];
-    for ( let i=0; i < pokedex.length; i += size){
-      newGroup.push(pokedex.slice(i, i+31));
-    } 
     return(
-      newGroup.map( (elem, index) => {
-        if (index === newGroup.length-1) {
-          setIsLoading(false)
-        }
-        return (<Column info={elem}/>)
-      })
+      pokedexFiltered.map( elem => <Column info={elem}/>)
     );
   }
 

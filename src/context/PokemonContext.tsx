@@ -1,11 +1,14 @@
 import {
-  createContext, useEffect, useState,
+  createContext, Dispatch, SetStateAction, useEffect, useState,
 } from 'react';
 import PokemonApi from '../api/PokemonApi';
 import { Pokemon } from '../interfaces/Pokemon';
 
 export interface PokemonContextData {
   isLoading: boolean;
+  searchInput: string;
+  setIsLoading: Dispatch<SetStateAction<boolean>>;
+  setSearchInput: Dispatch<SetStateAction<string>>;
   pokedex: Array<Pokemon>;
 }
 
@@ -13,6 +16,7 @@ const PokemonContext = createContext<PokemonContextData>({} as PokemonContextDat
 
 const PokemonProvider: React.FC = ({children}) => {
   const [pokedex, setPokedex] = useState<Array<Pokemon>>([]);
+  const [pokedexFiltered, setPokedexFiltered] = useState<Array<Pokemon>>([]);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [searchInput, setSearchInput] = useState<string>('');
 
@@ -24,21 +28,24 @@ const PokemonProvider: React.FC = ({children}) => {
       allPokemon.push(out);
     }
     setPokedex(allPokemon);
-    setIsLoading(false);
   }
 
   useEffect(() => {
     getPokemon();
+    setPokedexFiltered(pokedex);
   }, []);
 
-  useEffect(() => {
-    console.log(isLoading);
-  }, [isLoading]);
+  /* useEffect(() => {
+    
+  }, [searchInput]); */
   
   return(
     <PokemonContext.Provider
       value={{
         isLoading,
+        searchInput,
+        setSearchInput,
+        setIsLoading,
         pokedex,
       }}
     >

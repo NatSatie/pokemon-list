@@ -6,7 +6,15 @@ interface ItemProps {
   info: Pokemon;
 }
 
-const Item: React.FC<ItemProps> = ({info}) => {  
+const Item: React.FC<ItemProps> = ({info}) => { 
+
+  /* const PokemonImg = async () => {
+    const img = new Image();
+    img.src = info.sprites.front_default
+    await img.decode();
+    return img
+  } */
+
   return(
     <Container>
       <Avatar

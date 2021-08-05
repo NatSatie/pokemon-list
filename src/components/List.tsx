@@ -10,7 +10,7 @@ const List = () => {
   const [index, setIndex] = useState<number>(1);
   const [size, setSize] = useState<number>(31);
   const [pokemonGroup, setPokemonGroup] = useState<Array<Array<Pokemon>>>([]);
-  const { isLoading, pokedex } = usePokemon();
+  const { isLoading, setIsLoading, pokedex } = usePokemon();
 
   const ListGroup = () => {
     const newGroup = [];
@@ -18,7 +18,12 @@ const List = () => {
       newGroup.push(pokedex.slice(i, i+31));
     } 
     return(
-      newGroup.map( elem => <Column info={elem}/>)
+      newGroup.map( (elem, index) => {
+        if (index === newGroup.length-1) {
+          setIsLoading(false)
+        }
+        return (<Column info={elem}/>)
+      })
     );
   }
 

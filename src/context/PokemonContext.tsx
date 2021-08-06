@@ -7,10 +7,13 @@ import { Pokemon } from '../interfaces/Pokemon';
 export interface PokemonContextData {
   isLoading: boolean;
   isModalOpen: boolean;
+  isModalPokemon: Pokemon;
+  getEvolutionChain: (id: number) => any;
   searchInput: string;
   setIsLoading: Dispatch<SetStateAction<boolean>>;
   setIsModalOpen: Dispatch<SetStateAction<boolean>>;
   setSearchInput: Dispatch<SetStateAction<string>>;
+  setIsModalPokemon: Dispatch<SetStateAction<Pokemon>>;
   pokedex: Array<Pokemon>;
   pokedexFiltered: Array<Array<Pokemon>>;
 }
@@ -22,6 +25,7 @@ const PokemonProvider: React.FC = ({children}) => {
   const [pokedexFiltered, setPokedexFiltered] = useState<Array<Array<Pokemon>>>([]);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+  const [isModalPokemon, setIsModalPokemon] = useState<Pokemon>({} as Pokemon);
   const [searchInput, setSearchInput] = useState<string>('');
   const [size, setSize] = useState<number>(5);
 
@@ -35,6 +39,11 @@ const PokemonProvider: React.FC = ({children}) => {
     setPokedex(allPokemon);
     setPokedexFiltered(allPokemon);
     setIsLoading(false);
+  }
+
+  const getEvolutionChain = async () => {
+    const res = await PokemonApi.getEvolution(isModalPokemon?.id);
+    return res;
   }
 
   const filterPokemon = () => {
@@ -70,10 +79,13 @@ const PokemonProvider: React.FC = ({children}) => {
       value={{
         isLoading,
         isModalOpen,
+        isModalPokemon,
+        getEvolutionChain,
         searchInput,
         setSearchInput,
         setIsLoading,
         setIsModalOpen,
+        setIsModalPokemon,
         pokedex,
         pokedexFiltered
       }}

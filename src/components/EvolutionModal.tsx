@@ -8,12 +8,19 @@ import Line from './Line';
 import Modal, { ModalTransition } from '@atlaskit/modal-dialog';
 
 const EvolutionModal = () => {
-  const { setIsModalOpen } = usePokemon();
+  const { setIsModalOpen, isModalPokemon } = usePokemon();
+
+  const handleClose = () => setIsModalOpen(false);
 
   return(
     <ModalTransition>
-      <Modal>
-        asdasd
+      <Modal
+        onClose={handleClose}
+        actions={[
+          { text: 'Close', onClick: handleClose }
+        ]}
+      >
+        {`#${isModalPokemon.id} ${isModalPokemon.name}`}
       </Modal>
     </ModalTransition>
   )

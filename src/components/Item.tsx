@@ -8,15 +8,12 @@ interface ItemProps {
 }
 
 const Item: React.FC<ItemProps> = ({info}) => { 
-  const { setIsModalOpen } = usePokemon();
+  const { setIsModalOpen, setIsModalPokemon } = usePokemon();
 
   const Name = () => {
     return(
       <div>
-        {'#'}
-        {info.id}
-        {' '}
-        {info.name}
+        {`#${info.id} ${info.name}`}
       </div>
     );
   }
@@ -35,6 +32,7 @@ const Item: React.FC<ItemProps> = ({info}) => {
 
   const handleClick = () => {
     setIsModalOpen(true);
+    setIsModalPokemon(info);
   }
 
   return(

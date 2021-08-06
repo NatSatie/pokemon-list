@@ -6,7 +6,7 @@ import usePokemon from './hooks/usePokemon';
 import { Container } from './style/App';
 
 function App() {
-  const { isModalOpen, setIsModalOpen } = usePokemon();
+  const { isModalOpen } = usePokemon();
   return (
     <Container>
       <SearchBar />

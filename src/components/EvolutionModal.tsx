@@ -8,9 +8,49 @@ import Line from './Line';
 import Modal, { ModalTransition } from '@atlaskit/modal-dialog';
 
 const EvolutionModal = () => {
-  const { setIsModalOpen, isModalPokemon } = usePokemon();
+  const { getEvolutionChain, setIsModalOpen, isModalPokemon } = usePokemon();
+  const [evolutionInfo, setEvolutionInfo] = useState<any>();
 
   const handleClose = () => setIsModalOpen(false);
+
+  const BabyVersion = () => {
+    if (evolutionInfo.chain.is_baby) {
+      return(
+        <>
+          BabyVersion
+        </>
+      );
+    }
+  };
+
+  const ActualVersion = () => {
+    if (isModalPokemon) {
+      return(
+        <>
+          is ActualVersion form
+        </>
+      );
+    }
+  };
+
+  const NextVersions = () => {
+    if (evolutionInfo.chain.evolves_to) {
+      return(
+        <>
+          {evolutionInfo.chain.evolves_to.map( elem => {
+            console.log(elem);
+            return(
+              <p> evolution is valid </p>
+            )
+          })}
+        </>
+      );
+    }
+  }
+
+  useEffect(() => {
+    setEvolutionInfo(getEvolutionChain(isModalPokemon.id));
+  }, [isModalPokemon]);
 
   return(
     <ModalTransition>

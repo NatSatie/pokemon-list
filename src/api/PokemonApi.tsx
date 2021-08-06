@@ -6,12 +6,10 @@ const PokemonApi = {
     const posts = await res.json();
     return posts;
   },
-  getEvolution: async (id?: number) => {
-    if (id){
-      const res = await fetch(`https://pokeapi.co/api/v2/evolution-chain/${id}/`);
-      const posts = await res.json();
-      return posts;
-    }
+  getEvolution: async (id: number) => {
+    const res = await fetch(`https://pokeapi.co/api/v2/evolution-chain/${id}/`);
+    const posts = await res.json();
+    return posts;
   }
 };
 

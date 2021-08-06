@@ -49,8 +49,9 @@ const PokemonProvider: React.FC = ({children}) => {
 
   const getEvolutionChain = async (): Promise<EvolutionChain | any> => {
     if (isModalPokemon){
-      const res = await PokemonApi.getEvolution(isModalPokemon.id);
-      setEvolution(res);
+      const res = await PokemonApi.getSpecies(isModalPokemon.id);
+      const aux = await PokemonApi.getEvolution(res.evolution_chain.url);
+      setEvolution(aux);
     } else {
       return {};
     }

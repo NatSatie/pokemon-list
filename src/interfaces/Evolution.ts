@@ -12,11 +12,22 @@ interface EvolutionDetails {
 
 interface Chain {
   is_baby: boolean;
-  species: Species[];
+  species: {
+    name: string;
+    url: string;
+  };
   evolution_details: EvolutionDetails[];
   evolves_to: Chain[];
 }
 
 export interface EvolutionChain {
-  chain: Chain;
+  chain: {
+    is_baby: boolean;
+    species: {
+      name: string;
+      url: string;
+    };
+    evolution_details: EvolutionDetails[];
+    evolves_to: Chain[];
+  }
 }

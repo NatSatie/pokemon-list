@@ -6,15 +6,15 @@ import Item from './Item';
 import { Pokemon } from '../interfaces/Pokemon';
 import Line from './Line';
 import Modal, { ModalTransition } from '@atlaskit/modal-dialog';
+import { EvolutionChain } from '../interfaces/Evolution';
 
 const EvolutionModal = () => {
-  const { getEvolutionChain, setIsModalOpen, isModalPokemon } = usePokemon();
-  const [evolutionInfo, setEvolutionInfo] = useState<any>();
+  const { evolution, getEvolutionChain, setIsModalOpen, isModalPokemon } = usePokemon();
 
   const handleClose = () => setIsModalOpen(false);
 
   const BabyVersion = () => {
-    if (evolutionInfo.chain.is_baby) {
+    if (evolution.chain?.is_baby) {
       return(
         <>
           BabyVersion
@@ -33,23 +33,16 @@ const EvolutionModal = () => {
     }
   };
 
-  /* const NextVersions = () => {
-    if (evolutionInfo.chain.evolves_to) {
-      return(
-        <>
-          {evolutionInfo.chain.evolves_to.map( elem => {
-            console.log(elem);
-            return(
-              <p> evolution is valid </p>
-            )
-          })}
-        </>
+  const NextVersions = () => {
+    if (evolution.chain?.evolves_to) {
+      evolution.chain.evolves_to.map(
+        elem => console.log("elem.species: ", elem.species)
       );
     }
-  } */
+  }
 
-  useEffect(() => {
-    setEvolutionInfo(getEvolutionChain(isModalPokemon.id));
+  useEffect(()=>{
+    console.log("changes modal pokemon: ", evolution)
   }, [isModalPokemon]);
 
   return(
@@ -61,8 +54,9 @@ const EvolutionModal = () => {
         ]}
       >
         {`#${isModalPokemon.id} ${isModalPokemon.name}`}
-        {/* {BabyVersion()}
-        {ActualVersion()} */}
+        {BabyVersion()}
+        {ActualVersion()}
+        {NextVersions()}
       </Modal>
     </ModalTransition>
   )

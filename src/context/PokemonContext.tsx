@@ -1,10 +1,13 @@
+import { filter } from 'cypress/types/bluebird';
 import {
   createContext, Dispatch, SetStateAction, useEffect, useState,
 } from 'react';
 import PokemonApi from '../api/PokemonApi';
+import { EvolutionChain } from '../interfaces/Evolution';
 import { Pokemon } from '../interfaces/Pokemon';
 
 export interface PokemonContextData {
+  evolution: EvolutionChain;
   isLoading: boolean;
   isModalOpen: boolean;
   isModalPokemon: Pokemon;
@@ -26,8 +29,10 @@ const PokemonProvider: React.FC = ({children}) => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const [isModalPokemon, setIsModalPokemon] = useState<Pokemon>({} as Pokemon);
+  const [evolution, setEvolution] = useState<EvolutionChain>({} as EvolutionChain);
+  const [searchResult, setSearchResult] = useState<Array<Pokemon>>([]);
   const [searchInput, setSearchInput] = useState<string>('');
-  const [size, setSize] = useState<number>(5);
+  const [size, setSize] = useState<number>(Math.floor(window.innerWidth/256)-1);
 
   const getPokemon = async () => {
     const allPokemon = [];
@@ -38,14 +43,24 @@ const PokemonProvider: React.FC = ({children}) => {
     }
     setPokedex(allPokemon);
     setPokedexFiltered(allPokemon);
+    setSearchResult(allPokemon);
     setIsLoading(false);
   }
 
-  const getEvolutionChain = async () => {
+  const getEvolutionChain = async (): Promise<EvolutionChain | any> => {
     if (isModalPokemon){
       const res = await PokemonApi.getEvolution(isModalPokemon.id);
-      return res;
+      setEvolution(res);
+    } else {
+      return {};
     }
+  }
+
+  const breakToList = (filtered: Array<Pokemon>) => {
+    const newGroup = [] as Array<Array<Pokemon>>;
+    for ( let i=0; i < filtered.length; i += size){
+      newGroup.push(filtered.slice(i, i+size));
+    } setPokedexFiltered(newGroup);
   }
 
   const filterPokemon = () => {
@@ -55,15 +70,17 @@ const PokemonProvider: React.FC = ({children}) => {
         filtered.push(elem);
       }
     });
-    const newGroup = [] as Array<Array<Pokemon>>;
-    for ( let i=0; i < filtered.length; i += size){
-      newGroup.push(filtered.slice(i, i+size));
-    } setPokedexFiltered(newGroup);
+    setSearchResult(filtered);
+    breakToList(filtered);
   }
 
   useEffect(() => {
     getPokemon();
   }, []);
+
+  useEffect(() => {
+    breakToList(searchResult);
+  }, [size]);
 
   useEffect(() => {
     const newGroup = [] as Array<Array<Pokemon>>;
@@ -75,10 +92,23 @@ const PokemonProvider: React.FC = ({children}) => {
   useEffect(() => {
     filterPokemon();
   }, [searchInput]);
+
+  useEffect(() => {
+    getEvolutionChain();
+  }, [isModalPokemon]);
+
+  useEffect(() => {
+    const getSize = () => {
+      setSize(Math.floor(window.innerWidth/256)-1);
+    }
+    window.addEventListener("resize", getSize);
+    return () => window.removeEventListener("resize", getSize);
+  }, [window.innerWidth]);
   
   return(
     <PokemonContext.Provider
       value={{
+        evolution,
         isLoading,
         isModalOpen,
         isModalPokemon,

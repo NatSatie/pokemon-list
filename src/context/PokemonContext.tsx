@@ -6,8 +6,10 @@ import { Pokemon } from '../interfaces/Pokemon';
 
 export interface PokemonContextData {
   isLoading: boolean;
+  isModalOpen: boolean;
   searchInput: string;
   setIsLoading: Dispatch<SetStateAction<boolean>>;
+  setIsModalOpen: Dispatch<SetStateAction<boolean>>;
   setSearchInput: Dispatch<SetStateAction<string>>;
   pokedex: Array<Pokemon>;
   pokedexFiltered: Array<Array<Pokemon>>;
@@ -19,6 +21,7 @@ const PokemonProvider: React.FC = ({children}) => {
   const [pokedex, setPokedex] = useState<Array<Pokemon>>([]);
   const [pokedexFiltered, setPokedexFiltered] = useState<Array<Array<Pokemon>>>([]);
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const [searchInput, setSearchInput] = useState<string>('');
   const [size, setSize] = useState<number>(5);
 
@@ -66,9 +69,11 @@ const PokemonProvider: React.FC = ({children}) => {
     <PokemonContext.Provider
       value={{
         isLoading,
+        isModalOpen,
         searchInput,
         setSearchInput,
         setIsLoading,
+        setIsModalOpen,
         pokedex,
         pokedexFiltered
       }}

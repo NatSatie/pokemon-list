@@ -33,7 +33,7 @@ const EvolutionModal = () => {
     }
   };
 
-  const NextVersions = () => {
+  /* const NextVersions = () => {
     if (evolutionInfo.chain.evolves_to) {
       return(
         <>
@@ -46,7 +46,7 @@ const EvolutionModal = () => {
         </>
       );
     }
-  }
+  } */
 
   useEffect(() => {
     setEvolutionInfo(getEvolutionChain(isModalPokemon.id));
@@ -61,6 +61,8 @@ const EvolutionModal = () => {
         ]}
       >
         {`#${isModalPokemon.id} ${isModalPokemon.name}`}
+        {/* {BabyVersion()}
+        {ActualVersion()} */}
       </Modal>
     </ModalTransition>
   )

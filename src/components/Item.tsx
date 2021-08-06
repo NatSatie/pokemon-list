@@ -1,6 +1,6 @@
 import Avatar from '@atlaskit/avatar';
 import { Pokemon } from '../interfaces/Pokemon';
-import { Container } from '../style/Item';
+import { Container, InfoContainer, TypeContainer, TypeIcon } from '../style/Item';
 
 interface ItemProps {
   info: Pokemon;
@@ -15,16 +15,42 @@ const Item: React.FC<ItemProps> = ({info}) => {
     return img
   } */
 
+  const Name = () => {
+    return(
+      <div>
+        {'#'}
+        {info.id}
+        {' '}
+        {info.name}
+      </div>
+    );
+  }
+
+  const Type = (name: string) => {
+    const nametype = `https://duiker101.github.io/pokemon-type-svg-icons/icons/${name}.svg`
+    return(
+      <>
+        <img
+          src={nametype}
+          width="25"
+        ></img>
+      </>
+    );
+  }
+
   return(
     <Container>
       <Avatar
         src={info.sprites.front_default}
-        size="large"
+        size="xlarge"
       />
-      {'#'}
-      {info.id}
-      {' '}
-      {info.name}
+      <InfoContainer>
+        {Name()}
+        <TypeContainer>
+          {info.types.map(elem => Type(elem.type.name))}
+        </TypeContainer>
+        <span className="pksymbol-wrapper"><i className="pksymbol pksymbol-type-fairy"></i></span>
+      </InfoContainer>
     </Container>
   )
 }

@@ -22,6 +22,7 @@
     "cypress": "^8.1.0",
     "eslint": "^7.32.0",
     "next": "^11.0.1",
+    "pokesprite-images": "^2.5.4",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-scripts": "4.0.3",

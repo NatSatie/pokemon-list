@@ -20,6 +20,7 @@ const PokemonProvider: React.FC = ({children}) => {
   const [pokedexFiltered, setPokedexFiltered] = useState<Array<Array<Pokemon>>>([]);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [searchInput, setSearchInput] = useState<string>('');
+  const [size, setSize] = useState<number>(5);
 
   const getPokemon = async () => {
     const allPokemon = [];
@@ -36,15 +37,14 @@ const PokemonProvider: React.FC = ({children}) => {
   const filterPokemon = () => {
     const filtered = [] as Array<Pokemon>;
     pokedex.map( elem => {
-      if ((elem.name.search(searchInput)) > 0 || (elem.id === parseInt(searchInput))){
+      if ((elem.name.search(searchInput)) >= 0 || (elem.id.toString().search(searchInput) >= 0)){
         filtered.push(elem);
       }
     });
     const newGroup = [] as Array<Array<Pokemon>>;
-    for ( let i=0; i < filtered.length; i += 31){
-      newGroup.push(filtered.slice(i, i+31));
+    for ( let i=0; i < filtered.length; i += size){
+      newGroup.push(filtered.slice(i, i+size));
     } setPokedexFiltered(newGroup);
-    console.log(filtered);
   }
 
   useEffect(() => {
@@ -53,8 +53,8 @@ const PokemonProvider: React.FC = ({children}) => {
 
   useEffect(() => {
     const newGroup = [] as Array<Array<Pokemon>>;
-    for ( let i=0; i < pokedex.length; i += 31){
-      newGroup.push(pokedex.slice(i, i+31));
+    for ( let i=0; i < pokedex.length; i +=size){
+      newGroup.push(pokedex.slice(i, i+size));
     } setPokedexFiltered(newGroup);
   }, [pokedex]);
 

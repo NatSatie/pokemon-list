@@ -9431,6 +9431,11 @@ pnp-webpack-plugin@1.6.4:
   dependencies:
     ts-pnp "^1.1.6"
 
+pokesprite-images@^2.5.4:
+  version "2.5.4"
+  resolved "https://registry.yarnpkg.com/pokesprite-images/-/pokesprite-images-2.5.4.tgz#8d53f72102da0cb07ed4aa481e92dab2bb6efa2b"
+  integrity sha512-gdNCUIqCliM3Ky/Tvi6x35iK1JAAhUn4iemH8bUcIMhmKpxsIrnEmzioWr7+cvOGF/GdIYf4yui5JJDnz/Nb0w==
+
 portfinder@^1.0.26:
   version "1.0.28"
   resolved "https://registry.yarnpkg.com/portfinder/-/portfinder-1.0.28.tgz#67c4622852bd5374dd1dd900f779f53462fac778"

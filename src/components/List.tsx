@@ -4,14 +4,14 @@ import usePokemon from '../hooks/usePokemon';
 import { Container } from '../style/List';
 import Item from './Item';
 import { Pokemon } from '../interfaces/Pokemon';
-import Column from './Column';
+import Line from './Line';
 
 const List = () => {
   const { isLoading, pokedexFiltered } = usePokemon();
 
   const ListGroup = () => {
     return(
-      pokedexFiltered.map( elem => <Column info={elem}/>)
+      pokedexFiltered.map( elem => <Line info={elem}/>)
     );
   }
 

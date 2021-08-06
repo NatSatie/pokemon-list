@@ -1,12 +1,12 @@
 import { Pokemon } from '../interfaces/Pokemon';
-import { Container } from '../style/Column';
+import { Container } from '../style/Line';
 import Item from './Item';
 
 interface ColumnProps {
   info: Array<Pokemon>;
 }
 
-const Column: React.FC<ColumnProps> = ({info}) => {  
+const Line: React.FC<ColumnProps> = ({info}) => {  
   return(
     <Container>
       {info.map( (elem, index) => <Item key={index} info={elem}/>)}
@@ -14,4 +14,4 @@ const Column: React.FC<ColumnProps> = ({info}) => {
   )
 }
 
-export default Column;
+export default Line;

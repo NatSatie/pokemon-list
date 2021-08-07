@@ -1,21 +1,16 @@
-import { useEffect, useState } from 'react';
-import Spinner from '@atlaskit/spinner'
+import { useState } from 'react';
 import usePokemon from '../hooks/usePokemon';
-import { Container } from '../style/List';
-import Item from './Item';
-import { Pokemon } from '../interfaces/Pokemon';
-import Line from './Line';
 import Modal, { ModalTransition } from '@atlaskit/modal-dialog';
-import { Chain, EvolutionChain } from '../interfaces/Evolution';
 import { SingleSpecie } from '../interfaces/Species';
-import PokemonApi from '../api/PokemonApi';
 import EvolutionInformation from './EvolutionInformation';
+/* import { Wrapper } from '../style/EvolutionModal'; */
 
 const EvolutionModal = () => {
   const [arr, setArr] = useState<Array<SingleSpecie>>([]);
   const { setIsModalOpen, isModalPokemon, evolutionInfo, setEvolutionInfo } = usePokemon();
   const handleClose = () => {
     setIsModalOpen(false);
+    setEvolutionInfo([]);
   };
 
   return(

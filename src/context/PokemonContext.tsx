@@ -13,7 +13,7 @@ export interface PokemonContextData {
   isLoading: boolean;
   isModalOpen: boolean;
   isModalPokemon: Pokemon;
-  //getEvolutionChain: (id?: number) => any;
+  getEvolutionChain: () => void;
   searchInput: string;
   setIsLoading: Dispatch<SetStateAction<boolean>>;
   setIsModalOpen: Dispatch<SetStateAction<boolean>>;
@@ -73,28 +73,27 @@ const PokemonProvider: React.FC = ({children}) => {
     getPokemon();
   }, []);
 
-  /* useEffect(() => {
-    const tempEvolutionArray = [] as Array<SingleSpecie>;
-
-    const recursiveCall = (value: Chain) => {
-      if (value.evolves_to){
-        value.evolves_to.map( elem => recursiveCall(elem));
-      } tempEvolutionArray.push(value.species)
-    }
-
-    const getEvolution = async () => {
-      const info = await PokemonApi.getSpecies(isModalPokemon.id)
-      console.log(info)
-      const evol = await PokemonApi.getEvolution(info.evolution_chain.url)
-      if (evol.chain){
-        evol.chain.evolves_to.map( elem => recursiveCall(elem));
-        tempEvolutionArray.push(evol.chain.species)
-      }
-    }
-    
-    getEvolution();
-    setEvolutionInfo(tempEvolutionArray);
-  }, [isModalPokemon]); */
+  const getEvolutionChain = async () => {
+    const arr = [] as Array<SingleSpecie>
+    try {
+      const res = await PokemonApi.getSpecies(isModalPokemon.id);
+      const evol = await PokemonApi.getEvolution(res.evolution_chain.url);
+      arr.push(evol.chain.species)
+      if (evol.chain?.evolves_to){
+        evol.chain?.evolves_to.map(elem => {
+          const recursiveCall = (value: Chain) => {
+            arr.push(value.species)
+            value?.evolves_to.map(
+              aux => recursiveCall(aux)
+            )
+          }
+          recursiveCall(elem);
+        })
+      } 
+    } catch (error) {
+      console.error(error)
+    } setEvolutionInfo(arr);
+  }
 
   useEffect(() => {
     breakToList(searchResult);
@@ -128,6 +127,7 @@ const PokemonProvider: React.FC = ({children}) => {
         isModalOpen,
         isModalPokemon,
         searchInput,
+        getEvolutionChain,
         setSearchInput,
         setIsLoading,
         setIsModalOpen,

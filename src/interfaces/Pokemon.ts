@@ -1,3 +1,5 @@
+import { SingleSpecie } from "./Species";
+
 interface Sprites {
   front_default: string;
 }
@@ -18,4 +20,5 @@ export interface Pokemon {
   name: string;
   types: Array<TypeInfo>;
   sprites: Sprites;
+  species: SingleSpecie;
 }

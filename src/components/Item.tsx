@@ -8,7 +8,7 @@ interface ItemProps {
 }
 
 const Item: React.FC<ItemProps> = ({info}) => { 
-  const { setIsModalOpen, setIsModalPokemon } = usePokemon();
+  const { isModalPokemon ,setIsModalOpen, setIsModalPokemon, getEvolutionChain} = usePokemon();
 
   const Name = () => {
     return(
@@ -33,6 +33,7 @@ const Item: React.FC<ItemProps> = ({info}) => {
   const handleClick = () => {
     setIsModalOpen(true);
     setIsModalPokemon(info);
+    getEvolutionChain(info.id);
   }
 
   return(

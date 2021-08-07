@@ -3,20 +3,23 @@ import {
   createContext, Dispatch, SetStateAction, useEffect, useState,
 } from 'react';
 import PokemonApi from '../api/PokemonApi';
-import { EvolutionChain } from '../interfaces/Evolution';
+import { Chain, EvolutionChain } from '../interfaces/Evolution';
 import { Pokemon } from '../interfaces/Pokemon';
+import { SingleSpecie } from '../interfaces/Species';
 
 export interface PokemonContextData {
   evolution: EvolutionChain;
+  evolutionInfo: Array<SingleSpecie>;
   isLoading: boolean;
   isModalOpen: boolean;
   isModalPokemon: Pokemon;
-  getEvolutionChain: (id: number) => any;
+  getEvolutionChain: (id?: number) => any;
   searchInput: string;
   setIsLoading: Dispatch<SetStateAction<boolean>>;
   setIsModalOpen: Dispatch<SetStateAction<boolean>>;
   setSearchInput: Dispatch<SetStateAction<string>>;
   setIsModalPokemon: Dispatch<SetStateAction<Pokemon>>;
+  setEvolutionInfo: Dispatch<SetStateAction<Array<SingleSpecie>>>;
   pokedex: Array<Pokemon>;
   pokedexFiltered: Array<Array<Pokemon>>;
 }
@@ -30,6 +33,7 @@ const PokemonProvider: React.FC = ({children}) => {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const [isModalPokemon, setIsModalPokemon] = useState<Pokemon>({} as Pokemon);
   const [evolution, setEvolution] = useState<EvolutionChain>({} as EvolutionChain);
+  const [evolutionInfo, setEvolutionInfo] = useState<Array<SingleSpecie>>([]);
   const [searchResult, setSearchResult] = useState<Array<Pokemon>>([]);
   const [searchInput, setSearchInput] = useState<string>('');
   const [size, setSize] = useState<number>(Math.floor(window.innerWidth/256)-1);
@@ -47,14 +51,24 @@ const PokemonProvider: React.FC = ({children}) => {
     setIsLoading(false);
   }
 
-  const getEvolutionChain = async (): Promise<EvolutionChain | any> => {
-    if (isModalPokemon){
-      const res = await PokemonApi.getSpecies(isModalPokemon.id);
+  const getEvolutionChain = async (id ?: number): Promise<EvolutionChain | any> => {
+    if (id) {
+      const res = await PokemonApi.getSpecies(id);
       const aux = await PokemonApi.getEvolution(res.evolution_chain.url);
-      setEvolution(aux);
-    } else {
-      return {};
-    }
+      if (aux.chain) {
+        evolutionInfo.push(aux.chain.species)
+        aux.chain?.evolves_to?.map(
+          elem => evolutionRecursive(elem)
+        );
+      } 
+    } 
+  }
+
+  const evolutionRecursive = (value : Chain) => {
+    evolutionInfo.push(value.species)
+    if (value.evolves_to){
+      value.evolves_to.map( elem => evolutionRecursive(elem));
+    } 
   }
 
   const breakToList = (filtered: Array<Pokemon>) => {
@@ -95,10 +109,6 @@ const PokemonProvider: React.FC = ({children}) => {
   }, [searchInput]);
 
   useEffect(() => {
-    getEvolutionChain();
-  }, [isModalPokemon]);
-
-  useEffect(() => {
     const getSize = () => {
       setSize(Math.floor(window.innerWidth/256)-1);
     }
@@ -110,6 +120,7 @@ const PokemonProvider: React.FC = ({children}) => {
     <PokemonContext.Provider
       value={{
         evolution,
+        evolutionInfo,
         isLoading,
         isModalOpen,
         isModalPokemon,
@@ -119,6 +130,7 @@ const PokemonProvider: React.FC = ({children}) => {
         setIsLoading,
         setIsModalOpen,
         setIsModalPokemon,
+        setEvolutionInfo,
         pokedex,
         pokedexFiltered
       }}

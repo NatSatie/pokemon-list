@@ -13,6 +13,11 @@ const PokemonApi = {
     const posts = await res.json();
     return posts;
   },
+  getSpeciesByURL: async (url: string): Promise<Species> => {
+    const res = await fetch(url);
+    const posts = await res.json();
+    return posts;
+  },
   getEvolution: async (url: string): Promise<EvolutionChain> => {
     const res = await fetch(url);
     const posts = await res.json();

@@ -1,7 +1,4 @@
-export interface Species {
-  name: string;
-  url: string;
-}
+import { SingleSpecie } from "./Species";
 
 interface EvolutionDetails {
   item: any;
@@ -10,24 +7,13 @@ interface EvolutionDetails {
   min_level: number;
 }
 
-interface Chain {
+export interface Chain {
   is_baby: boolean;
-  species: {
-    name: string;
-    url: string;
-  };
-  evolution_details: EvolutionDetails[];
-  evolves_to: Chain[];
+  species: SingleSpecie;
+  evolution_details: Array<EvolutionDetails>;
+  evolves_to: Array<Chain>;
 }
 
 export interface EvolutionChain {
-  chain: {
-    is_baby: boolean;
-    species: {
-      name: string;
-      url: string;
-    };
-    evolution_details: EvolutionDetails[];
-    evolves_to: Chain[];
-  }
+  chain: Chain;
 }

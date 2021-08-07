@@ -6,15 +6,36 @@ import Item from './Item';
 import { Pokemon } from '../interfaces/Pokemon';
 import Line from './Line';
 import Modal, { ModalTransition } from '@atlaskit/modal-dialog';
-import { EvolutionChain } from '../interfaces/Evolution';
+import { Chain, EvolutionChain } from '../interfaces/Evolution';
+import { SingleSpecie } from '../interfaces/Species';
+import PokemonApi from '../api/PokemonApi';
 
 const EvolutionModal = () => {
-  const { evolution, setIsModalOpen, isModalPokemon } = usePokemon();
+  const { evolution, setIsModalOpen, isModalPokemon, setEvolutionInfo, evolutionInfo } = usePokemon();
+  const [pokemonList, setPokemonList] = useState<Array<SingleSpecie>>([]as Array<SingleSpecie>);
 
-  const handleClose = () => setIsModalOpen(false);
+  const handleClose = () => {
+    setIsModalOpen(false);
+    setEvolutionInfo([]);
+  };
 
-  const EvolutionChainImages = () => {
-    console.log(evolution.chain)
+  const evolutionData = async (url: string) => {
+    console.log(url)
+    try {
+      const res = await PokemonApi.getSpeciesByURL(url);
+      console.log(res)
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
+  const evolutions = () => {
+    evolutionInfo.map(
+      evo => {
+        evolutionData(evo.url);
+        console.log(evo.url)
+      }
+    );
   }
 
   return(
@@ -26,7 +47,6 @@ const EvolutionModal = () => {
         ]}
       >
         {`#${isModalPokemon.id} ${isModalPokemon.name}`}
-        {EvolutionChainImages()}
       </Modal>
     </ModalTransition>
   )

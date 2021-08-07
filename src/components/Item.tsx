@@ -8,7 +8,7 @@ interface ItemProps {
 }
 
 const Item: React.FC<ItemProps> = ({info}) => { 
-  const { isModalPokemon ,setIsModalOpen, setIsModalPokemon, getEvolutionChain} = usePokemon();
+  const { isModalPokemon ,setIsModalOpen, setEvolutionInfo, setIsModalPokemon} = usePokemon();
 
   const Name = () => {
     return(
@@ -33,7 +33,6 @@ const Item: React.FC<ItemProps> = ({info}) => {
   const handleClick = () => {
     setIsModalOpen(true);
     setIsModalPokemon(info);
-    getEvolutionChain(info.id);
   }
 
   return(
@@ -45,7 +44,7 @@ const Item: React.FC<ItemProps> = ({info}) => {
       <InfoContainer>
         {Name()}
         <TypeContainer>
-          {info.types.map(elem => Type(elem.type.name))}
+          {info.types.map((elem, index) => Type(elem.type.name))}
         </TypeContainer>
         <span className="pksymbol-wrapper"><i className="pksymbol pksymbol-type-fairy"></i></span>
       </InfoContainer>

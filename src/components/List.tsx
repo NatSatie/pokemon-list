@@ -11,7 +11,7 @@ const List = () => {
 
   const ListGroup = () => {
     return(
-      pokedexFiltered.map( elem => <Line info={elem}/>)
+      pokedexFiltered.map( (elem, index) => <Line key={index} info={elem}/>)
     );
   }
 

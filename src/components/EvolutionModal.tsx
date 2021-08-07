@@ -9,34 +9,14 @@ import Modal, { ModalTransition } from '@atlaskit/modal-dialog';
 import { Chain, EvolutionChain } from '../interfaces/Evolution';
 import { SingleSpecie } from '../interfaces/Species';
 import PokemonApi from '../api/PokemonApi';
+import EvolutionInformation from './EvolutionInformation';
 
 const EvolutionModal = () => {
-  const { evolution, setIsModalOpen, isModalPokemon, setEvolutionInfo, evolutionInfo } = usePokemon();
-  const [pokemonList, setPokemonList] = useState<Array<SingleSpecie>>([]as Array<SingleSpecie>);
-
+  const [arr, setArr] = useState<Array<SingleSpecie>>([]);
+  const { setIsModalOpen, isModalPokemon, evolutionInfo, setEvolutionInfo } = usePokemon();
   const handleClose = () => {
     setIsModalOpen(false);
-    setEvolutionInfo([]);
   };
-
-  const evolutionData = async (url: string) => {
-    console.log(url)
-    try {
-      const res = await PokemonApi.getSpeciesByURL(url);
-      console.log(res)
-    } catch (error) {
-      console.error(error);
-    }
-  }
-
-  const evolutions = () => {
-    evolutionInfo.map(
-      evo => {
-        evolutionData(evo.url);
-        console.log(evo.url)
-      }
-    );
-  }
 
   return(
     <ModalTransition>
@@ -47,6 +27,7 @@ const EvolutionModal = () => {
         ]}
       >
         {`#${isModalPokemon.id} ${isModalPokemon.name}`}
+        <EvolutionInformation />
       </Modal>
     </ModalTransition>
   )

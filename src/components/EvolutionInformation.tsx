@@ -10,6 +10,7 @@ import { Chain, EvolutionChain } from '../interfaces/Evolution';
 import { SingleSpecie, Species } from '../interfaces/Species';
 import PokemonApi from '../api/PokemonApi';
 import { values } from 'cypress/types/lodash';
+import { resolve } from 'cypress/types/bluebird';
 
 const EvolutionInformation= () => {
   const [speciesInfo, setSpeciesInfo] = useState<Array<SingleSpecie>>();
@@ -32,18 +33,46 @@ const EvolutionInformation= () => {
         recursiveCall(elem);
       })
     }
-    console.log(arr)
-    setSpeciesInfo(arr)
+    await setSpeciesInfo(arr);
   }
+
+/*   const getEachEvolution = async (value: string) => {
+    const res = await PokemonApi.getSpeciesByURL(value);
+    console.log(res)
+  } */
 
   useEffect(() => {
     getEvolutionChain();
-    /* console.log(speciesInfo) */
-  }, [isModalPokemon]);
+    //speciesInfo?.map( elem => getEachEvolution(elem.url));
+    console.log(speciesInfo)
+  }, [setSpeciesInfo]);
+
+  const getInfo = async (value: string) => {
+    try {
+      const res = await PokemonApi.getSpeciesByURL(value);
+      return res
+    } catch (error){
+      console.error(error)
+    }
+  }
+
+  const Container = (value: SingleSpecie | any) => {
+    const pokemon = value.value;
+    const info = [] as Array<any>;
+    Promise.resolve(getInfo(pokemon.url).then(values => info.push(values)));
+    console.log(info)
+    if (pokemon.name){
+      return <p> {pokemon.name}</p>
+    } return <></>
+  }
 
   return(
     <>
-      {speciesInfo?.map( elem => <p>{elem.name}</p>)}
+      {speciesInfo?.map( elem => {
+        if (elem) {
+          return <Container value={elem}/>
+        } return <></>
+      })}
     </>
   )
 }

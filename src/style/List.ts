@@ -7,3 +7,7 @@ export const Container = styled.div`
 `;
 
 export const SpinnerContainer = styled.div``;
+
+export const ListContainer = styled.div`
+  margin-bottom: 64px;
+`;

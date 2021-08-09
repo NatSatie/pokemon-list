@@ -1,24 +1,40 @@
-import Textfield from '@atlaskit/textfield';
-import { Container } from '../style/SearchBar';
+import { useState, FormEvent, KeyboardEvent } from 'react';
+import { SearchButton, Container, Input } from '../style/SearchBar';
 import usePokemon from '../hooks/usePokemon';
-import { FormEvent } from 'react';
 
 const SearchBar = () => {
+  const [searchInput, setSearchInput] = useState<string>('');
   const pocket = usePokemon();
 
   const handleChange = (event: FormEvent<HTMLInputElement>) => {
-    pocket.setSearchInput(event.currentTarget.value);
+    setSearchInput(event.currentTarget.value);
+  }
+
+  const handleSearch = () => {
+    pocket.filterPokemon(searchInput);
+  }
+
+  const handleSearchByEnter = (event: KeyboardEvent<HTMLInputElement>) => {
+    if (event.key === "Enter"){
+      handleSearch();
+    }
   }
 
   return(
     <Container>
-      <Textfield
+      <Input
         name="basic"
         aria-label="default text field"
         placeholder="Digite o nome ou número do pokémon"
+        onKeyPress={handleSearchByEnter}
         onChange={handleChange}
-        width={450}
+        pattern="[^()/><\][\\\x22,;|]+"
       />
+      <SearchButton
+        onClick={handleSearch}
+      >
+        Procurar
+      </SearchButton>
     </Container>
   )
 }

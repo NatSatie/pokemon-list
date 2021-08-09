@@ -14,10 +14,9 @@ export interface PokemonContextData {
   isModalOpen: boolean;
   isModalPokemon: Pokemon;
   getEvolutionChain: () => void;
-  searchInput: string;
+  filterPokemon: (input: string) => void;
   setIsLoading: Dispatch<SetStateAction<boolean>>;
   setIsModalOpen: Dispatch<SetStateAction<boolean>>;
-  setSearchInput: Dispatch<SetStateAction<string>>;
   setIsModalPokemon: Dispatch<SetStateAction<Pokemon>>;
   setEvolutionInfo: Dispatch<SetStateAction<Array<SingleSpecie>>>;
   pokedex: Array<Pokemon>;
@@ -58,10 +57,10 @@ const PokemonProvider: React.FC = ({children}) => {
     } setPokedexFiltered(newGroup);
   }
 
-  const filterPokemon = () => {
+  const filterPokemon = (input: string) => {
     const filtered = [] as Array<Pokemon>;
     pokedex.map( elem => {
-      if ((elem.name.search(searchInput)) >= 0 || (elem.id.toString().search(searchInput) >= 0)){
+      if ((elem.name.search(input)) >= 0 || (elem.id.toString().search(input) >= 0)){
         filtered.push(elem);
       }
     });
@@ -107,10 +106,6 @@ const PokemonProvider: React.FC = ({children}) => {
   }, [pokedex]);
 
   useEffect(() => {
-    filterPokemon();
-  }, [searchInput]);
-
-  useEffect(() => {
     const getSize = () => {
       setSize(Math.floor(window.innerWidth/256)-1);
     }
@@ -123,12 +118,11 @@ const PokemonProvider: React.FC = ({children}) => {
       value={{
         evolution,
         evolutionInfo,
+        filterPokemon,
         isLoading,
         isModalOpen,
         isModalPokemon,
-        searchInput,
         getEvolutionChain,
-        setSearchInput,
         setIsLoading,
         setIsModalOpen,
         setIsModalPokemon,

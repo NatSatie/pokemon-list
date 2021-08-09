@@ -1,6 +1,6 @@
 import Spinner from '@atlaskit/spinner'
 import usePokemon from '../hooks/usePokemon';
-import { Container,SpinnerContainer } from '../style/List';
+import { Container, ListContainer, SpinnerContainer } from '../style/List';
 import Line from './Line';
 
 const List = () => {
@@ -13,7 +13,16 @@ const List = () => {
           <Spinner appearance="invert" size="xlarge"/>
         </SpinnerContainer>
       )
-    } return <>{pokedexFiltered.map( (elem, index) => <Line key={index} info={elem}/>)}</>
+    }
+    if (pokedexFiltered.length > 0){
+      return (
+        <ListContainer>
+          {pokedexFiltered.map( (elem, index) => <Line key={index} info={elem}/>)}
+        </ListContainer>
+      )
+    } else {
+      return <> Nenhum resultado encontrado </>
+    }
   }
 
   return(

@@ -9,6 +9,7 @@
     "@atlaskit/modal-dialog": "^11.7.3",
     "@atlaskit/spinner": "^15.0.11",
     "@atlaskit/textfield": "^5.0.5",
+    "@atlaskit/tooltip": "^17.3.1",
     "@babel/eslint-parser": "^7.15.0",
     "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/react": "^11.1.0",

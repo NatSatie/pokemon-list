@@ -17,6 +17,8 @@ interface TypeInfo {
 
 export interface Pokemon {
   id: number;
+  height: number;
+  weight: number;
   name: string;
   types: Array<TypeInfo>;
   sprites: Sprites;

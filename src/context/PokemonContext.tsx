@@ -36,7 +36,7 @@ const PokemonProvider: React.FC = ({children}) => {
   const [evolutionInfo, setEvolutionInfo] = useState<Array<SingleSpecie>>([] as Array<SingleSpecie>);
   const [searchResult, setSearchResult] = useState<Array<Pokemon>>([]);
   const [searchInput, setSearchInput] = useState<string>('');
-  const [size, setSize] = useState<number>(Math.floor(window.innerWidth/256)-1);
+  const [size, setSize] = useState<number>(Math.floor(window.innerWidth/272)-1);
 
   const getPokemon = async () => {
     const allPokemon = [];

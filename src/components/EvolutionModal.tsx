@@ -3,7 +3,7 @@ import usePokemon from '../hooks/usePokemon';
 import Modal, { ModalTransition } from '@atlaskit/modal-dialog';
 import { SingleSpecie } from '../interfaces/Species';
 import EvolutionInformation from './EvolutionInformation';
-import { IdContainer, InfoContainer, ModalContainer  } from '../style/EvolutionModal';
+import { IdContainer, InfoContainer, ModalContainer } from '../style/EvolutionModal';
 import PokemonType from './PokemonType';
 
 const EvolutionModal = () => {
@@ -29,6 +29,7 @@ const EvolutionModal = () => {
           <IdContainer>
             {`#${isModalPokemon.id} ${isModalPokemon.name}`}
           </IdContainer>
+          <PokemonType info={isModalPokemon}/>
           <h4> Informações </h4>
           <InfoContainer>
             {`Altura: ${isModalPokemon.height/10}m`}
@@ -36,8 +37,6 @@ const EvolutionModal = () => {
           <InfoContainer>
             {`Peso: ${isModalPokemon.height/10}kg`}
           </InfoContainer>
-          <h4> Tipo </h4>
-          <PokemonType info={isModalPokemon}/>
           <h4> Cadeia de evolução </h4>
           <EvolutionInformation />
         </ModalContainer>

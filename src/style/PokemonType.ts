@@ -24,12 +24,13 @@ export const ImgContainer = styled.div<IconColorProps>`
 `;
 
 export const ImgWrapper = styled.div`
-  padding: 4px;
+  padding: 0 8px 0 0;
 `;
 
 export const InfoContainer = styled.div`
   display: flex;
   flex-direction: row;
+  padding: 16px 0;
 `;
 
 export const TypeContainer = styled.div`

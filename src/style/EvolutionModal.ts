@@ -12,11 +12,10 @@ export const IdContainer = styled.div`
   font-variant: normal;
   text-transform: none;
   text-transform: capitalize;
-  width: 100%;
-  padding: 16px 0 4px 0 ;
   display: flex;
   flex-direction: row;
-  vertical-align: center;
+  vertical-align: middle;
+  padding: 16px 0;
 `;
 
 export const InfoContainer = styled.div`

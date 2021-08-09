@@ -15,8 +15,9 @@ const SearchBar = () => {
       <Textfield
         name="basic"
         aria-label="default text field"
-        placeholder="Search pokémon"
+        placeholder="Digite o nome ou número do pokémon"
         onChange={handleChange}
+        width={450}
       />
     </Container>
   )

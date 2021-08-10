@@ -1,6 +1,7 @@
 # Pokedex Gen 1
 
 Esse projeto foi desenvolvido em React e Typescript com [Create React App](https://github.com/facebook/create-react-app).
+
 [Demonstração](https://mr34l.sse.codesandbox.io/)
 
 ## Instalando o Projeto

@@ -1,6 +1,6 @@
-# Getting Started with Create React App
+# Pokedex Gen 1
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Esse projeto foi desenvolvido em React e Typescript com [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
 

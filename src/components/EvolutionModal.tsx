@@ -1,20 +1,15 @@
-import { useState } from 'react';
 import usePokemon from '../hooks/usePokemon';
 import Modal, { ModalTransition } from '@atlaskit/modal-dialog';
-import { SingleSpecie } from '../interfaces/Species';
 import EvolutionInformation from './EvolutionInformation';
 import { IdContainer, InfoContainer, ModalContainer } from '../style/EvolutionModal';
 import PokemonType from './PokemonType';
 
 const EvolutionModal = () => {
-  const [arr, setArr] = useState<Array<SingleSpecie>>([]);
-  const { setIsModalOpen, isModalPokemon, evolutionInfo, setEvolutionInfo } = usePokemon();
+  const { setIsModalOpen, isModalPokemon, setEvolutionInfo } = usePokemon();
   const handleClose = () => {
     setIsModalOpen(false);
     setEvolutionInfo([]);
   };
-
-  console.log(isModalPokemon)
 
   return(
     <ModalTransition>

@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import Avatar from '@atlaskit/avatar';
 
 interface TypeIconProps {
   classtype: string;

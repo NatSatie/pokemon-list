@@ -1,14 +1,12 @@
-import { filter } from 'cypress/types/bluebird';
 import {
   createContext, Dispatch, SetStateAction, useEffect, useState,
 } from 'react';
 import PokemonApi from '../api/PokemonApi';
-import { Chain, EvolutionChain } from '../interfaces/Evolution';
+import { Chain } from '../interfaces/Evolution';
 import { Pokemon } from '../interfaces/Pokemon';
 import { SingleSpecie } from '../interfaces/Species';
 
 export interface PokemonContextData {
-  evolution: EvolutionChain;
   evolutionInfo: Array<SingleSpecie>;
   isLoading: boolean;
   isModalOpen: boolean;
@@ -31,10 +29,8 @@ const PokemonProvider: React.FC = ({children}) => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const [isModalPokemon, setIsModalPokemon] = useState<Pokemon>({} as Pokemon);
-  const [evolution, setEvolution] = useState<EvolutionChain>({} as EvolutionChain);
   const [evolutionInfo, setEvolutionInfo] = useState<Array<SingleSpecie>>([] as Array<SingleSpecie>);
   const [searchResult, setSearchResult] = useState<Array<Pokemon>>([]);
-  const [searchInput, setSearchInput] = useState<string>('');
   const [size, setSize] = useState<number>(Math.floor(window.innerWidth/272)-1);
 
   const getPokemon = async () => {
@@ -116,7 +112,6 @@ const PokemonProvider: React.FC = ({children}) => {
   return(
     <PokemonContext.Provider
       value={{
-        evolution,
         evolutionInfo,
         filterPokemon,
         isLoading,

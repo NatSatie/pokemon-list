@@ -1,5 +1,4 @@
 import Tooltip from '@atlaskit/tooltip';
-import usePokemon from '../hooks/usePokemon';
 import { Pokemon } from '../interfaces/Pokemon';
 import { Img, ImgWrapper, ImgContainer,InfoContainer } from '../style/PokemonType';
 

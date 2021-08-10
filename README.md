@@ -2,9 +2,17 @@
 
 Esse projeto foi desenvolvido em React e Typescript com [Create React App](https://github.com/facebook/create-react-app).
 
+# Apresentação
+
 [Demonstração](https://mr34l.sse.codesandbox.io/)
 
-## Instalando o Projeto
+O painel é uma lista completa dos 151 pokemons disponíveis na primeira geração.
+<img width="960" alt="chrome_T6Agv6IMZQ" src="https://user-images.githubusercontent.com/18223610/128923977-146667b6-0047-4737-b3a1-af151af4199c.png">
+
+É possível fazer buscar por nome ou id
+![AJEROzd1Ja](https://user-images.githubusercontent.com/18223610/128924028-ebd1b751-de9b-4df3-b065-9c8daee4d0d8.gif)
+
+# Instalação
 
 ### 1 - Clonar o Projeto
 

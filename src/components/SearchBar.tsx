@@ -11,7 +11,12 @@ const SearchBar = () => {
   }
 
   const handleSearch = () => {
-    pocket.filterPokemon(searchInput);
+    const format = new RegExp("[^^!@#$%¨&/*?]")
+    if( searchInput.match(format) ){
+      pocket.filterPokemon(searchInput);
+    } else {
+      pocket.filterPokemon("");
+    }
   }
 
   const handleSearchByEnter = (event: KeyboardEvent<HTMLInputElement>) => {
@@ -23,15 +28,17 @@ const SearchBar = () => {
   return(
     <Container>
       <Input
+        type="text"
         name="basic"
         aria-label="default text field"
         placeholder="Digite o nome ou número do pokémon"
         onKeyPress={handleSearchByEnter}
         onChange={handleChange}
-        pattern="[^()/><\][\\\x22,;|]+"
+        data-cy="pokemon-search"
       />
       <SearchButton
         onClick={handleSearch}
+        data-cy="pokemon-search-button"
       >
         Procurar
       </SearchButton>

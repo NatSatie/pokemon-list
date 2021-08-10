@@ -16,7 +16,9 @@ const List = () => {
     }
     if (pokedexFiltered.length > 0){
       return (
-        <ListContainer>
+        <ListContainer
+          data-cy="pokemon-list"
+        >
           {pokedexFiltered.map( (elem, index) => <Line key={index} info={elem}/>)}
         </ListContainer>
       )
